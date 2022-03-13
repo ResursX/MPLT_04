@@ -11,49 +11,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MPLT_04_INTERFACE
+namespace MPLT_04_INTERFACE.Forms
 {
-    public partial class Form1 : Form
+    public partial class EditorForm : Form
     {
-        public static readonly Color[] initialColors = { Color.Black, Color.White };
+        private static readonly Color[] initialColors = { Color.Black, Color.White };
 
         // Графический редактор
 
-        GraphicalEditor GraphicalEditor;
+        private readonly GraphicalEditor GraphicalEditor;
 
         // Действия
 
-        Logic.Actions.Action ActionCreate;
-        ToolStripButton ButtonCreate;
+        private readonly Logic.Actions.Action ActionCreate;
+        private readonly ToolStripButton ButtonCreate;
 
-        Logic.Actions.Action ActionOpen;
-        ToolStripButton ButtonOpen;
+        private readonly Logic.Actions.Action ActionOpen;
+        private readonly ToolStripButton ButtonOpen;
 
-        Logic.Actions.Action ActionSave;
-        ToolStripButton ButtonSave;
+        private readonly Logic.Actions.Action ActionSave;
+        private readonly ToolStripButton ButtonSave;
 
-        Logic.Actions.Action ActionClose;
-        ToolStripButton ButtonClose;
+        private readonly Logic.Actions.Action ActionClose;
+        private readonly ToolStripButton ButtonClose;
 
-        List<ActionColor> ColorActions;
-        List<ToolStripButton> ColorButtons;
+        private readonly List<ActionColor> ColorActions;
+        private readonly List<ToolStripButton> ColorButtons;
 
-        Logic.Actions.Action ActionColorCycle;
-        ToolStripButton ButtonColorCycle;
+        private readonly Logic.Actions.Action ActionColorCycle;
+        private readonly ToolStripButton ButtonColorCycle;
 
-        ToolStripTextBox BrushSizeTextBox;
+        private readonly ToolStripTextBox BrushSizeTextBox;
 
-        Logic.Actions.Action ActionBrushSizeInc;
-        ToolStripButton ButtonBrushSizeInc;
+        private readonly Logic.Actions.Action ActionBrushSizeInc;
+        private readonly ToolStripButton ButtonBrushSizeInc;
 
-        Logic.Actions.Action ActionBrushSizeDec;
-        ToolStripButton ButtonBrushSizeDec;
+        private readonly Logic.Actions.Action ActionBrushSizeDec;
+        private readonly ToolStripButton ButtonBrushSizeDec;
 
         // Инструменты
-        List<Tool> Tools;
-        List<ToolStripButton> ToolButtons;
+        private readonly List<Tool> Tools;
+        private readonly List<ToolStripButton> ToolButtons;
 
-        public Form1()
+        public EditorForm()
         {
             InitializeComponent();
 
@@ -63,11 +63,11 @@ namespace MPLT_04_INTERFACE
             Tools = new List<Tool>();
             ToolButtons = new List<ToolStripButton>();
 
-            GraphicalEditor = new GraphicalEditor(pictureBox1);
+            GraphicalEditor = new GraphicalEditor(pictureBox);
 
             //Действия
 
-            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), Resou);
+            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), null);
 
             ButtonOpen = AddActionButton(ActionOpen = new ActionOpen(GraphicalEditor), null);
 
@@ -93,7 +93,7 @@ namespace MPLT_04_INTERFACE
 
             actionStrip.Items.Add(new ToolStripSeparator());
 
-            foreach(Color c in initialColors)
+            foreach (Color c in initialColors)
             {
                 ActionColor action = new ActionColor(GraphicalEditor, c);
 
@@ -216,11 +216,6 @@ namespace MPLT_04_INTERFACE
             {
                 try
                 {
-                    //if (e is MouseEventArgs me)
-                    //{
-                    //    if ()
-                    //}
-
                     GraphicalEditor.TrySelectTool(tool);
                 }
                 catch (Exception ex)
@@ -244,33 +239,21 @@ namespace MPLT_04_INTERFACE
                 }
             };
 
-            //button.DoubleClick += (sender, e) =>
-            //{
-            //    try
-            //    {
-            //        tool.ExtraAction(GraphicalEditor);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(this, ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //};
-
             toolStrip.Items.Add(button);
             ToolButtons.Add(button);
 
             return button;
         }
 
-        private void pictureBox1_Resize(object sender, EventArgs e)
+        private void pictureBox_Resize(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBox.Image != null)
             {
-                toolStripSize.Text = pictureBox1.Width.ToString() + "x" + pictureBox1.Height.ToString();
+                statusStripSize.Text = pictureBox.Width.ToString() + "x" + pictureBox.Height.ToString();
             }
             else
             {
-                toolStripSize.Text = "-";
+                statusStripSize.Text = "-";
             }
         }
     }
