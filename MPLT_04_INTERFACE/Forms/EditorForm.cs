@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -57,7 +58,7 @@ namespace MPLT_04_INTERFACE.Forms
         {
             InitializeComponent();
 
-            ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(EditorForm));
+            ResourceManager resourceManager = Resources.ResourceManager;
 
             ColorActions = new List<ActionColor>();
             ColorButtons = new List<ToolStripButton>();
