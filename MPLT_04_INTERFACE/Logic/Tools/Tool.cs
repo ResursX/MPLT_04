@@ -15,18 +15,14 @@ namespace MPLT_04_INTERFACE.Logic.Tools
 
     abstract class Tool
     {
-        private readonly string name;
-        private readonly bool selectable;
+        public string Name { protected set; get; }
+        public bool Selectable { protected set; get; }
 
         public Tool(string name, bool selectable)
         {
-            this.name = name;
-            this.selectable = selectable;
+            Name = name;
+            Selectable = selectable;
         }
-
-        public string Name => name;
-
-        public bool Selectable => selectable;
 
         abstract public void SelectAction(GraphicalEditor editor);
         abstract public void ExtraAction(GraphicalEditor editor);

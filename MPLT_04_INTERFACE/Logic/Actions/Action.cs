@@ -5,12 +5,12 @@
     abstract class Action
     {
         protected readonly GraphicalEditor editor;
-        private readonly string name;
+        public string Name { protected set; get; }
 
         public Action(GraphicalEditor editor, string name)
         {
             this.editor = editor;
-            this.name = name;
+            Name = name;
         }
 
         public void DoAction()
@@ -30,8 +30,6 @@
         }
 
         abstract protected void DoActionInternal();
-
-        public string Name => name;
 
         //События
         public event ActionEventHandler OnPreAction = delegate { };
