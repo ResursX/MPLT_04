@@ -181,9 +181,11 @@ namespace MPLT_04_INTERFACE.Forms
 
                     Debug.WriteLine("Loaded succesfully");
                 }
-                catch
+                catch (Exception e)
                 {
-                    Debug.WriteLine("Loading failed");
+                    Debug.WriteLine("Loading failed! " + e.Message);
+
+                    //throw;
                 }
             }
         }

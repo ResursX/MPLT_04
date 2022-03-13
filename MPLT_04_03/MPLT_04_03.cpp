@@ -1,4 +1,4 @@
-#include "MPLT_04_02.h"
+#include "MPLT_04_03.h"
 
 #include "pch.h"
 #include <windows.h>
@@ -7,7 +7,7 @@
 using namespace Gdiplus;
 #pragma comment (lib,"Gdiplus.lib")
 
-char name[] = "Зеркалирование изображения по горизонтали";
+char name[] = "Обесцвечивание изображения";
 
 char* ToolName()
 {

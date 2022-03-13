@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -32,11 +33,24 @@ namespace MPLT_04_INTERFACE.Logic.Tools
             {
                 try
                 {
-                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
-                    Selectable = Marshal.GetDelegateForFunctionPointer<Func<bool>>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
+                    Debug.WriteLine(hLibrary);
 
-                    SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
-                    ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+
+                    //Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
+                    //Selectable = Marshal.GetDelegateForFunctionPointer<Func<bool>>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
+
+                    IntPtr hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction");
+
+                    Debug.WriteLine("hp " + hProc);
+
+                    SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
+
+                    hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction");
+
+                    Debug.WriteLine("hp " + hProc);
+
+                    ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
 
                     //MouseDownDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolMouseAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolMouseDown"));
                     //MouseUpDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolMouseAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolMouseUp"));
@@ -46,12 +60,12 @@ namespace MPLT_04_INTERFACE.Logic.Tools
                 {
                     Dispose();
 
-                    throw new Exception();
+                    throw;
                 }
             }
             else
             {
-                throw new Exception();
+                throw new Exception("A");
             }
         }
 
