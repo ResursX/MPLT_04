@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Text;
@@ -167,9 +169,22 @@ namespace MPLT_04_INTERFACE.Forms
             AddToolButton(new ToolBrush(), (Bitmap)resourceManager.GetObject("ToolBrush"));
             AddToolButton(new ToolLine(), (Bitmap)resourceManager.GetObject("ToolLine"));
 
-            foreach ()
+            foreach (string lib in Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.dll"))
             {
+                Debug.WriteLine("Trying to load lib: " + lib);
 
+                try
+                {
+                    Tool tool = new ToolLoaded(lib);
+
+                    AddToolButton(tool, (Bitmap)resourceManager.GetObject("ToolBrush"));
+
+                    Debug.WriteLine("Loaded succesfully");
+                }
+                catch
+                {
+                    Debug.WriteLine("Loading failed");
+                }
             }
         }
 

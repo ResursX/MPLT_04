@@ -15,6 +15,11 @@ bool ToolSelectable()
     return false;
 }
 
+//Gdiplus::Bitmap ToolIcon()
+//{
+//
+//}
+
 void ToolSelectAction(Gdiplus::Bitmap bitmap)
 {
     bitmap.RotateFlip(Gdiplus::RotateNoneFlipX);
