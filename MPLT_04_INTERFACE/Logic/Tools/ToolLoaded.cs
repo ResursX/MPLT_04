@@ -35,22 +35,37 @@ namespace MPLT_04_INTERFACE.Logic.Tools
                 {
                     Debug.WriteLine(hLibrary);
 
-                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+                    IntPtr hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolName");
 
-                    //Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
-                    //Selectable = Marshal.GetDelegateForFunctionPointer<Func<bool>>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
+                    if (hProc != IntPtr.Zero)
+                    {
+                        Name = Marshal.PtrToStringAuto(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(hProc)());
+                    }
 
-                    IntPtr hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction");
+                    hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable");
+
+                    if (hProc != IntPtr.Zero)
+                    {
+                        Selectable = Marshal.GetDelegateForFunctionPointer<Func<bool>>(hProc)();
+                    }
+
+                    hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction");
 
                     Debug.WriteLine("hp " + hProc);
 
-                    SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
+                    if (hProc != IntPtr.Zero)
+                    {
+                        SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
+                    }
 
                     hProc = LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction");
 
                     Debug.WriteLine("hp " + hProc);
 
-                    ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
+                    if (hProc != IntPtr.Zero)
+                    {
+                        ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(hProc);
+                    }
 
                     //MouseDownDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolMouseAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolMouseDown"));
                     //MouseUpDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolMouseAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolMouseUp"));
@@ -60,7 +75,7 @@ namespace MPLT_04_INTERFACE.Logic.Tools
                 {
                     Dispose();
 
-                    throw;
+                    throw new Exception(Marshal.GetLastWin32Error().ToString());
                 }
             }
             else
@@ -71,12 +86,18 @@ namespace MPLT_04_INTERFACE.Logic.Tools
 
         public override void SelectAction(GraphicalEditor editor)
         {
-            SelectDelegate(editor.Image);
+            if (SelectDelegate != null && editor != null)
+            {
+                SelectDelegate(editor.Image);
+            }
         }
 
         public override void ExtraAction(GraphicalEditor editor)
         {
-            ExtraDelegate(editor.Image);
+            if (ExtraDelegate != null && editor != null)
+            {
+                ExtraDelegate(editor.Image);
+            }
         }
 
         public override void MouseDown(GraphicalEditor editor, MouseEventArgs args)

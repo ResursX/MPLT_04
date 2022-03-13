@@ -6,8 +6,8 @@
 using namespace Gdiplus;
 #pragma comment (lib,"Gdiplus.lib")
 
-char* ToolName();
-bool ToolSelectable();
+extern "C" __declspec(dllexport) char* ToolName();
+extern "C" __declspec(dllexport) bool ToolSelectable();
 
-void ToolSelectAction(Bitmap);
-void ToolExtraAction(Bitmap);
+extern "C" __declspec(dllexport) void ToolSelectAction(Bitmap bitmap);
+extern "C" __declspec(dllexport) void ToolExtraAction(Bitmap bitmap);
