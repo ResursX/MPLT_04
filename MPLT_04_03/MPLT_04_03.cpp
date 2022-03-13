@@ -9,20 +9,20 @@ using namespace Gdiplus;
 
 char name[] = "Обесцвечивание изображения";
 
-char* ToolName()
+extern "C" __declspec(dllexport) char* __stdcall ToolName()
 {
     return name;
 }
-bool ToolSelectable()
+extern "C" __declspec(dllexport) bool __stdcall ToolSelectable()
 {
     return false;
 }
 
-void ToolSelectAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(Bitmap bitmap)
 {
     bitmap.RotateFlip(RotateNoneFlipX);
 }
 
-void ToolExtraAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(Bitmap bitmap)
 {
 }
