@@ -1,13 +1,13 @@
 #pragma once
 
 #include <windows.h>
+#include <objidl.h>
 #include <gdiplus.h>
+using namespace Gdiplus;
+#pragma comment (lib,"Gdiplus.lib")
 
 char* ToolName();
 bool ToolSelectable();
 
-void ToolSelectAction(Gdiplus::Bitmap);
-void ToolExtraAction(Gdiplus::Bitmap);
-//void ToolMouseDown(Gdiplus::Bitmap, int, int);
-//void ToolMouseUp(Gdiplus::Bitmap, int, int);
-//void ToolMouseMove(Gdiplus::Bitmap, int, int);
+void ToolSelectAction(Bitmap);
+void ToolExtraAction(Bitmap);

@@ -1,7 +1,11 @@
 #include "MPLT_04_02.h"
 
+#include "pch.h"
 #include <windows.h>
+#include <objidl.h>
 #include <gdiplus.h>
+using namespace Gdiplus;
+#pragma comment (lib,"Gdiplus.lib")
 
 char name[] = "«еркалирование изображени€ по горизонтали";
 
@@ -15,28 +19,11 @@ bool ToolSelectable()
     return false;
 }
 
-//Gdiplus::Bitmap ToolIcon()
-//{
-//
-//}
-
-void ToolSelectAction(Gdiplus::Bitmap bitmap)
+void ToolSelectAction(Bitmap bitmap)
 {
-    bitmap.RotateFlip(Gdiplus::RotateNoneFlipX);
+    bitmap.RotateFlip(RotateNoneFlipX);
 }
 
-void ToolExtraAction(Gdiplus::Bitmap bitmap)
+void ToolExtraAction(Bitmap bitmap)
 {
 }
-
-//void ToolMouseDown(Gdiplus::Bitmap bitmap, int X, int Y)
-//{
-//}
-//
-//void ToolMouseUp(Gdiplus::Bitmap bitmap, int X, int Y)
-//{
-//}
-//
-//void ToolMouseMove(Gdiplus::Bitmap bitmap, int X, int Y)
-//{
-//}
