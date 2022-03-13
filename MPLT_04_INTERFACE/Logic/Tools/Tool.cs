@@ -9,11 +9,7 @@ namespace MPLT_04_INTERFACE.Logic.Tools
 {
     delegate void ToolEventHandler(object? sender, Tool tool, GraphicalEditor editor);
 
-    //enum ToolType {
-    //    
-    //}
-
-    abstract class Tool
+    abstract class Tool : IDisposable
     {
         public string Name { protected set; get; }
         public bool Selectable { protected set; get; }
@@ -31,5 +27,6 @@ namespace MPLT_04_INTERFACE.Logic.Tools
         abstract public void MouseUp(GraphicalEditor editor, MouseEventArgs args);
 
         abstract public void MouseMove(GraphicalEditor editor, MouseEventArgs args);
+        public abstract void Dispose();
     }
 }

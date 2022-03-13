@@ -14,10 +14,10 @@ namespace MPLT_04_INTERFACE.Logic
 
     class GraphicalEditor : IDisposable
     {
-        public Image Image { private set; get; }
+        public Bitmap Image { private set; get; }
         public Graphics Graphics { private set; get; }
 
-        public Image PreviewImage { private set; get; }
+        public Bitmap PreviewImage { private set; get; }
         public Graphics PreviewGraphics { private set; get; }
 
         public Pen Pen { private set; get; }

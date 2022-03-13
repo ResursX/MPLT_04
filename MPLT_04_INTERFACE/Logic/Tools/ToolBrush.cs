@@ -20,7 +20,6 @@ namespace MPLT_04_INTERFACE.Logic.Tools
 
         public override void ExtraAction(GraphicalEditor editor)
         {
-            MessageBox.Show("NYI");
         }
 
         public override void MouseDown(GraphicalEditor editor, MouseEventArgs args)
@@ -61,6 +60,10 @@ namespace MPLT_04_INTERFACE.Logic.Tools
                     }
                 }
             }
+        }
+
+        public override void Dispose()
+        {
         }
     }
 }

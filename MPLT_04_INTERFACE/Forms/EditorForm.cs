@@ -166,6 +166,11 @@ namespace MPLT_04_INTERFACE.Forms
 
             AddToolButton(new ToolBrush(), (Bitmap)resourceManager.GetObject("ToolBrush"));
             AddToolButton(new ToolLine(), (Bitmap)resourceManager.GetObject("ToolLine"));
+
+            foreach ()
+            {
+
+            }
         }
 
         private ToolStripButton AddActionButton(Logic.Actions.Action action)

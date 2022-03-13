@@ -8,6 +8,6 @@ bool ToolSelectable();
 
 void ToolSelectAction(Gdiplus::Bitmap);
 void ToolExtraAction(Gdiplus::Bitmap);
-void ToolMouseDown(Gdiplus::Bitmap);
-void ToolMouseUp(Gdiplus::Bitmap);
-void ToolMouseMove(Gdiplus::Bitmap);
+//void ToolMouseDown(Gdiplus::Bitmap, int, int);
+//void ToolMouseUp(Gdiplus::Bitmap, int, int);
+//void ToolMouseMove(Gdiplus::Bitmap, int, int);

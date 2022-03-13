@@ -24,14 +24,14 @@ void ToolExtraAction(Gdiplus::Bitmap bitmap)
 {
 }
 
-void ToolMouseDown(Gdiplus::Bitmap bitmap)
-{
-}
-
-void ToolMouseUp(Gdiplus::Bitmap bitmap)
-{
-}
-
-void ToolMouseMove(Gdiplus::Bitmap bitmap)
-{
-}
+//void ToolMouseDown(Gdiplus::Bitmap bitmap, int X, int Y)
+//{
+//}
+//
+//void ToolMouseUp(Gdiplus::Bitmap bitmap, int X, int Y)
+//{
+//}
+//
+//void ToolMouseMove(Gdiplus::Bitmap bitmap, int X, int Y)
+//{
+//}

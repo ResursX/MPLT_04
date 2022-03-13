@@ -65,5 +65,9 @@ namespace MPLT_04_INTERFACE.Logic.Tools
                 }
             }
         }
+
+        public override void Dispose()
+        {
+        }
     }
 }
