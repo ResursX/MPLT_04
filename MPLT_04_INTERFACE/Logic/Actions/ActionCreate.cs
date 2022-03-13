@@ -1,7 +1,12 @@
-﻿namespace MPLT_04_INTERFACE.Logic.Actions
+﻿using MPLT_04_INTERFACE.Logic.Actions.ActionCreateLogic;
+using System.Windows.Forms;
+
+namespace MPLT_04_INTERFACE.Logic.Actions
 {
     class ActionCreate : Action
     {
+        private static ImageCreationForm imageCreationForm = new ImageCreationForm();
+
         public ActionCreate(GraphicalEditor editor) : base(editor, "Создать")
         {
 
@@ -9,7 +14,12 @@
 
         protected override void DoActionInternal()
         {
-            editor.CreateImage(400, 300);
+            imageCreationForm.Reset();
+
+            if (imageCreationForm.ShowDialog() == DialogResult.OK)
+            {
+                editor.CreateImage(imageCreationForm.GetWidth(), imageCreationForm.GetHeight());
+            }
         }
     }
 }

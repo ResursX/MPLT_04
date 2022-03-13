@@ -57,6 +57,8 @@ namespace MPLT_04_INTERFACE.Forms
         {
             InitializeComponent();
 
+            ComponentResourceManager resourceManager = new ComponentResourceManager(typeof(EditorForm));
+
             ColorActions = new List<ActionColor>();
             ColorButtons = new List<ToolStripButton>();
 
@@ -67,14 +69,14 @@ namespace MPLT_04_INTERFACE.Forms
 
             //Действия
 
-            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), null);
+            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), (Bitmap)resourceManager.GetObject("NewFile"));
 
-            ButtonOpen = AddActionButton(ActionOpen = new ActionOpen(GraphicalEditor), null);
+            ButtonOpen = AddActionButton(ActionOpen = new ActionOpen(GraphicalEditor), (Bitmap)resourceManager.GetObject("OpenFile"));
 
-            ButtonSave = AddActionButton(ActionSave = new ActionSave(GraphicalEditor), null);
+            ButtonSave = AddActionButton(ActionSave = new ActionSave(GraphicalEditor), (Bitmap)resourceManager.GetObject("SaveFile"));
             ButtonSave.Enabled = false;
 
-            ButtonClose = AddActionButton(ActionClose = new ActionClose(GraphicalEditor), null);
+            ButtonClose = AddActionButton(ActionClose = new ActionClose(GraphicalEditor), (Bitmap)resourceManager.GetObject("CloseFile"));
             ButtonClose.Enabled = false;
 
             GraphicalEditor.OnImageChange += (e) =>
@@ -109,7 +111,7 @@ namespace MPLT_04_INTERFACE.Forms
                 ColorButtons.Add(button);
             }
 
-            ButtonColorCycle = AddActionButton(ActionColorCycle = new ActionColorCycle(GraphicalEditor), null);
+            ButtonColorCycle = AddActionButton(ActionColorCycle = new ActionColorCycle(GraphicalEditor), (Bitmap)resourceManager.GetObject("CycleColor"));
 
             ActionColorCycle.OnPostAction += (_, _) => {
                 for (int i = 0; i < ColorActions.Count; i++)
@@ -120,7 +122,7 @@ namespace MPLT_04_INTERFACE.Forms
 
             actionStrip.Items.Add(new ToolStripSeparator());
 
-            ButtonBrushSizeDec = AddActionButton(ActionBrushSizeDec = new ActionBrushSizeAdd(GraphicalEditor, -1), null);
+            ButtonBrushSizeDec = AddActionButton(ActionBrushSizeDec = new ActionBrushSizeAdd(GraphicalEditor, -1), (Bitmap)resourceManager.GetObject("BrushSizeDec"));
 
             // Поле изменения размера кисти
             {
@@ -157,12 +159,12 @@ namespace MPLT_04_INTERFACE.Forms
                 actionStrip.Items.Add(BrushSizeTextBox);
             }
 
-            ButtonBrushSizeInc = AddActionButton(ActionBrushSizeInc = new ActionBrushSizeAdd(GraphicalEditor, 1), null);
+            ButtonBrushSizeInc = AddActionButton(ActionBrushSizeInc = new ActionBrushSizeAdd(GraphicalEditor, 1), (Bitmap)resourceManager.GetObject("BrushSizeInc"));
 
             // Инструменты
 
-            AddToolButton(new ToolBrush(), null);
-            AddToolButton(new ToolLine(), null);
+            AddToolButton(new ToolBrush(), (Bitmap)resourceManager.GetObject("ToolBrush"));
+            AddToolButton(new ToolLine(), (Bitmap)resourceManager.GetObject("ToolLine"));
         }
 
         private ToolStripButton AddActionButton(Logic.Actions.Action action)

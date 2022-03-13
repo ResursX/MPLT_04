@@ -56,7 +56,7 @@ namespace MPLT_04_INTERFACE.Forms
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(48, 401);
+            this.toolStrip.Size = new System.Drawing.Size(48, 403);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip2";
             // 
@@ -69,7 +69,7 @@ namespace MPLT_04_INTERFACE.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(48, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(752, 401);
+            this.panel1.Size = new System.Drawing.Size(752, 403);
             this.panel1.TabIndex = 2;
             // 
             // pictureBox
@@ -87,17 +87,16 @@ namespace MPLT_04_INTERFACE.Forms
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStripSize});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 426);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // statusStripSize
             // 
-            this.statusStripSize.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripSize.Name = "statusStripSize";
-            this.statusStripSize.Size = new System.Drawing.Size(16, 19);
+            this.statusStripSize.Size = new System.Drawing.Size(12, 17);
             this.statusStripSize.Text = "-";
             // 
             // EditorForm
