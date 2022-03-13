@@ -32,12 +32,12 @@ namespace MPLT_04_INTERFACE.Forms
             this.actionStrip = new System.Windows.Forms.ToolStrip();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStripSize = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionStrip
@@ -64,12 +64,24 @@ namespace MPLT_04_INTERFACE.Forms
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.pictureBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(48, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(752, 401);
             this.panel1.TabIndex = 2;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
             // 
             // statusStrip1
             // 
@@ -88,17 +100,6 @@ namespace MPLT_04_INTERFACE.Forms
             this.statusStripSize.Size = new System.Drawing.Size(16, 19);
             this.statusStripSize.Text = "-";
             // 
-            // pictureBox
-            // 
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
-            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -112,9 +113,9 @@ namespace MPLT_04_INTERFACE.Forms
             this.Text = "EditorForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
