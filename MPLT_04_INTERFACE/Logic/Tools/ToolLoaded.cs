@@ -10,7 +10,10 @@ using System.Windows.Forms;
 
 namespace MPLT_04_INTERFACE.Logic.Tools
 {
-    internal delegate void LoadedToolAction(Bitmap bitmap);
+    internal delegate IntPtr LoadedToolName();
+    internal delegate bool LoadedToolSelectable();
+
+    internal delegate void LoadedToolAction(IntPtr bitmap);
 
     //internal delegate void LoadedToolMouseAction(Bitmap bitmap, int X, int Y);
 
@@ -33,10 +36,16 @@ namespace MPLT_04_INTERFACE.Logic.Tools
             {
                 try
                 {
-                    Debug.WriteLine(hLibrary);
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
 
-                    Name = Marshal.PtrToStringAuto(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
-                    Selectable = Marshal.GetDelegateForFunctionPointer<Func<bool>>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
+                    //Debug.WriteLine(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
+
+                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName> (LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
+
+                    Selectable = Marshal.GetDelegateForFunctionPointer<LoadedToolSelectable>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
 
                     SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
                     ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
@@ -54,15 +63,15 @@ namespace MPLT_04_INTERFACE.Logic.Tools
             }
             else
             {
-                throw new Exception("A");
+                throw new Exception();
             }
         }
 
         public override void SelectAction(GraphicalEditor editor)
         {
-            if (SelectDelegate != null && editor != null)
+            if (SelectDelegate != null && editor != null && editor.Image != null)
             {
-                SelectDelegate(editor.Image);
+                SelectDelegate(editor.Image.GetHbitmap());
             }
         }
 
@@ -70,7 +79,7 @@ namespace MPLT_04_INTERFACE.Logic.Tools
         {
             if (ExtraDelegate != null && editor != null)
             {
-                ExtraDelegate(editor.Image);
+                ExtraDelegate(editor.Image.GetHbitmap());
             }
         }
 

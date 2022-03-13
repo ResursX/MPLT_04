@@ -13,9 +13,11 @@
   <ItemGroup>
     <ProjectReference Include="..\MPLT_04_02\MPLT_04_02.vcxproj">
       <Private>true</Private>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
     </ProjectReference>
     <ProjectReference Include="..\MPLT_04_03\MPLT_04_03.vcxproj">
       <Private>true</Private>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
     </ProjectReference>
   </ItemGroup>
 

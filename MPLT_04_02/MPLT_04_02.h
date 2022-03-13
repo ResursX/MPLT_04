@@ -9,5 +9,5 @@ using namespace Gdiplus;
 extern "C" __declspec(dllexport) char* __stdcall ToolName();
 extern "C" __declspec(dllexport) bool __stdcall ToolSelectable();
 
-extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(Bitmap bitmap);
-extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(Bitmap bitmap);
+extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(HBITMAP bitmap);
+extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(HBITMAP bitmap);

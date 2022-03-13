@@ -1,6 +1,7 @@
 #include "MPLT_04_02.h"
 
 #include "pch.h"
+#include <tchar.h>
 #include <windows.h>
 #include <objidl.h>
 #include <gdiplus.h>
@@ -18,11 +19,17 @@ extern "C" __declspec(dllexport) bool __stdcall ToolSelectable()
     return false;
 }
 
-extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(HBITMAP bitmap)
 {
-    bitmap.RotateFlip(RotateNoneFlipX);
+
+
+    //Gdiplus::Bitmap btm;
+
+    //btm.FromHBITMAP(bitmap);
+
+    //(*bitmap).SetPixel(10, 10, Color(255, 0, 0));
 }
 
-extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(HBITMAP bitmap)
 {
 }

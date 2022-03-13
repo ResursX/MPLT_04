@@ -1,4 +1,6 @@
 ﻿
+using MPLT_04_INTERFACE.Logic.Tools;
+
 namespace MPLT_04_INTERFACE.Forms
 {
     partial class EditorForm
@@ -18,6 +20,14 @@ namespace MPLT_04_INTERFACE.Forms
             {
                 components.Dispose();
             }
+
+            foreach (Tool t in Tools)
+            {
+                t.Dispose();
+            }
+
+            GraphicalEditor.Dispose();
+
             base.Dispose(disposing);
         }
 

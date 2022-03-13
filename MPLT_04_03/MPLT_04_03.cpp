@@ -18,11 +18,11 @@ extern "C" __declspec(dllexport) bool __stdcall ToolSelectable()
     return false;
 }
 
-extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolSelectAction(Gdiplus::Bitmap bitmap)
 {
     bitmap.RotateFlip(RotateNoneFlipX);
 }
 
-extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(Bitmap bitmap)
+extern "C" __declspec(dllexport) void __stdcall ToolExtraAction(Gdiplus::Bitmap bitmap)
 {
 }
