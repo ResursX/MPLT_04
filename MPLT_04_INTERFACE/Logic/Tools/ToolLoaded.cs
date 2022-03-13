@@ -13,7 +13,7 @@ namespace MPLT_04_INTERFACE.Logic.Tools
     internal delegate IntPtr LoadedToolName();
     internal delegate bool LoadedToolSelectable();
 
-    internal delegate void LoadedToolAction(IntPtr bitmap);
+    internal delegate void LoadedToolAction(IntPtr bitmap, IntPtr hdc);
 
     //internal delegate void LoadedToolMouseAction(Bitmap bitmap, int X, int Y);
 
@@ -71,15 +71,15 @@ namespace MPLT_04_INTERFACE.Logic.Tools
         {
             if (SelectDelegate != null && editor != null && editor.Image != null)
             {
-                SelectDelegate(editor.Image.GetHbitmap());
+                SelectDelegate(editor.Image.GetHbitmap(), editor.Graphics.GetHdc());
             }
         }
 
         public override void ExtraAction(GraphicalEditor editor)
         {
-            if (ExtraDelegate != null && editor != null)
+            if (ExtraDelegate != null && editor != null && editor.Image != null)
             {
-                ExtraDelegate(editor.Image.GetHbitmap());
+                ExtraDelegate(editor.Image.GetHbitmap(), editor.Graphics.GetHdc());
             }
         }
 
