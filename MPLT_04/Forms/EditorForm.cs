@@ -1,6 +1,7 @@
-﻿using MPLT_04_INTERFACE.Logic;
-using MPLT_04_INTERFACE.Logic.Actions;
-using MPLT_04_INTERFACE.Logic.Tools;
+﻿using MPLT_04;
+using MPLT_04.Logic;
+using MPLT_04.Logic.Actions;
+using MPLT_04.Logic.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MPLT_04_INTERFACE.Forms
+namespace MPLT_04.Forms
 {
     public partial class EditorForm : Form
     {
@@ -60,8 +61,6 @@ namespace MPLT_04_INTERFACE.Forms
         {
             InitializeComponent();
 
-            ResourceManager resourceManager = Resources.ResourceManager;
-
             ColorActions = new List<ActionColor>();
             ColorButtons = new List<ToolStripButton>();
 
@@ -72,14 +71,14 @@ namespace MPLT_04_INTERFACE.Forms
 
             //Действия
 
-            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), (Bitmap)resourceManager.GetObject("NewFile"));
+            ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), Resources.NewFile);
 
-            ButtonOpen = AddActionButton(ActionOpen = new ActionOpen(GraphicalEditor), (Bitmap)resourceManager.GetObject("OpenFile"));
+            ButtonOpen = AddActionButton(ActionOpen = new ActionOpen(GraphicalEditor), Resources.OpenFile);
 
-            ButtonSave = AddActionButton(ActionSave = new ActionSave(GraphicalEditor), (Bitmap)resourceManager.GetObject("SaveFile"));
+            ButtonSave = AddActionButton(ActionSave = new ActionSave(GraphicalEditor), Resources.SaveFile);
             ButtonSave.Enabled = false;
 
-            ButtonClose = AddActionButton(ActionClose = new ActionClose(GraphicalEditor), (Bitmap)resourceManager.GetObject("CloseFile"));
+            ButtonClose = AddActionButton(ActionClose = new ActionClose(GraphicalEditor), Resources.CloseFile);
             ButtonClose.Enabled = false;
 
             GraphicalEditor.OnImageChange += (e) =>
@@ -114,7 +113,7 @@ namespace MPLT_04_INTERFACE.Forms
                 ColorButtons.Add(button);
             }
 
-            ButtonColorCycle = AddActionButton(ActionColorCycle = new ActionColorCycle(GraphicalEditor), (Bitmap)resourceManager.GetObject("CycleColor"));
+            ButtonColorCycle = AddActionButton(ActionColorCycle = new ActionColorCycle(GraphicalEditor), Resources.CycleColor);
 
             ActionColorCycle.OnPostAction += (s, e) => {
                 for (int i = 0; i < ColorActions.Count; i++)
@@ -125,7 +124,7 @@ namespace MPLT_04_INTERFACE.Forms
 
             actionStrip.Items.Add(new ToolStripSeparator());
 
-            ButtonBrushSizeDec = AddActionButton(ActionBrushSizeDec = new ActionBrushSizeAdd(GraphicalEditor, -1), (Bitmap)resourceManager.GetObject("BrushSizeDec"));
+            ButtonBrushSizeDec = AddActionButton(ActionBrushSizeDec = new ActionBrushSizeAdd(GraphicalEditor, -1), Resources.BrushSizeDec);
 
             // Поле изменения размера кисти
             {
@@ -162,12 +161,12 @@ namespace MPLT_04_INTERFACE.Forms
                 actionStrip.Items.Add(BrushSizeTextBox);
             }
 
-            ButtonBrushSizeInc = AddActionButton(ActionBrushSizeInc = new ActionBrushSizeAdd(GraphicalEditor, 1), (Bitmap)resourceManager.GetObject("BrushSizeInc"));
+            ButtonBrushSizeInc = AddActionButton(ActionBrushSizeInc = new ActionBrushSizeAdd(GraphicalEditor, 1), Resources.BrushSizeInc);
 
             // Инструменты
 
-            AddToolButton(new ToolBrush(), (Bitmap)resourceManager.GetObject("ToolBrush"));
-            AddToolButton(new ToolLine(), (Bitmap)resourceManager.GetObject("ToolLine"));
+            AddToolButton(new ToolBrush(), Resources.ToolBrush);
+            AddToolButton(new ToolLine(), Resources.ToolLine);
 
             foreach (string lib in Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.dll"))
             {
@@ -177,7 +176,7 @@ namespace MPLT_04_INTERFACE.Forms
                 {
                     Tool tool = new ToolLoaded(lib);
 
-                    AddToolButton(tool, (Bitmap)resourceManager.GetObject("ToolBrush"));
+                    AddToolButton(tool, Resources.ToolBrush);
 
                     Debug.WriteLine("Loaded succesfully");
                 }
