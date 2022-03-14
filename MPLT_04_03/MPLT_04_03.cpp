@@ -1,5 +1,6 @@
 #include "MPLT_04_03.h"
 
+#include "pch.h"
 #include <windows.h>
 
 char name[] = "Grayscale";

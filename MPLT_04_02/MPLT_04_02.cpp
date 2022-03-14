@@ -1,5 +1,6 @@
 #include "MPLT_04_02.h"
 
+#include "pch.h"
 #include <tchar.h>
 #include <windows.h>
 
