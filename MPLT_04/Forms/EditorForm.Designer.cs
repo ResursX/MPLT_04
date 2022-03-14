@@ -55,7 +55,7 @@ namespace MPLT_04.Forms
             this.actionStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.actionStrip.Location = new System.Drawing.Point(0, 0);
             this.actionStrip.Name = "actionStrip";
-            this.actionStrip.Size = new System.Drawing.Size(800, 25);
+            this.actionStrip.Size = new System.Drawing.Size(686, 25);
             this.actionStrip.TabIndex = 0;
             this.actionStrip.Text = "toolStrip1";
             // 
@@ -66,7 +66,7 @@ namespace MPLT_04.Forms
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(48, 403);
+            this.toolStrip.Size = new System.Drawing.Size(48, 343);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip2";
             // 
@@ -79,7 +79,7 @@ namespace MPLT_04.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(48, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(752, 403);
+            this.panel1.Size = new System.Drawing.Size(638, 343);
             this.panel1.TabIndex = 2;
             // 
             // pictureBox
@@ -97,9 +97,10 @@ namespace MPLT_04.Forms
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStripSize});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 368);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(686, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -111,9 +112,9 @@ namespace MPLT_04.Forms
             // 
             // EditorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(686, 390);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.actionStrip);

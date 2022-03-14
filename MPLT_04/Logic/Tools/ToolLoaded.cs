@@ -36,10 +36,10 @@ namespace MPLT_04.Logic.Tools
             {
                 try
                 {
-                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
-                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
-                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
-                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
+                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
 
                     Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName> (LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
 
@@ -61,7 +61,7 @@ namespace MPLT_04.Logic.Tools
             }
             else
             {
-                throw new Exception();
+                throw new Exception("Can't load");
             }
         }
 
