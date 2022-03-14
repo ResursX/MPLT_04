@@ -36,12 +36,10 @@ namespace MPLT_04.Logic.Tools
             {
                 try
                 {
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
-
-                    //Debug.WriteLine(Marshal.GetDelegateForFunctionPointer<Func<IntPtr>>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
 
                     Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName> (LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
 
@@ -71,7 +69,13 @@ namespace MPLT_04.Logic.Tools
         {
             if (SelectDelegate != null && editor != null && editor.Image != null)
             {
-                SelectDelegate(editor.Image.GetHbitmap(), editor.Graphics.GetHdc());
+                IntPtr hBtn = editor.Image.GetHbitmap();
+                IntPtr hdc = editor.Graphics.GetHdc();
+
+                SelectDelegate(hBtn, hdc);
+
+                editor.Graphics.ReleaseHdc();
+                LibraryLoader.DeleteObject(hBtn);
             }
         }
 
@@ -79,7 +83,13 @@ namespace MPLT_04.Logic.Tools
         {
             if (ExtraDelegate != null && editor != null && editor.Image != null)
             {
-                ExtraDelegate(editor.Image.GetHbitmap(), editor.Graphics.GetHdc());
+                IntPtr hBtn = editor.Image.GetHbitmap();
+                IntPtr hdc = editor.Graphics.GetHdc();
+
+                ExtraDelegate(hBtn, hdc);
+
+                editor.Graphics.ReleaseHdc();
+                LibraryLoader.DeleteObject(hBtn);
             }
         }
 
