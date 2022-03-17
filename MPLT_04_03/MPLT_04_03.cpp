@@ -9,9 +9,9 @@ extern "C" __declspec(dllexport) char* __cdecl ToolName()
 {
     return name;
 }
-extern "C" __declspec(dllexport) bool __cdecl ToolSelectable()
+extern "C" __declspec(dllexport) int __cdecl ToolSelectable()
 {
-    return false;
+    return 0;
 }
 
 extern "C" __declspec(dllexport) void __cdecl ToolSelectAction(HBITMAP bitmap, HDC hdc)

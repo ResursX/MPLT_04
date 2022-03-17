@@ -10,9 +10,13 @@ using System.Windows.Forms;
 
 namespace MPLT_04.Logic.Tools
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate IntPtr LoadedToolName();
-    internal delegate bool LoadedToolSelectable();
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal delegate int LoadedToolSelectable();
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate void LoadedToolAction(IntPtr bitmap, IntPtr hdc);
 
     //internal delegate void LoadedToolMouseAction(Bitmap bitmap, int X, int Y);
@@ -41,9 +45,11 @@ namespace MPLT_04.Logic.Tools
                     Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
                     Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
 
-                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName> (LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
+                    
 
-                    Selectable = Marshal.GetDelegateForFunctionPointer<LoadedToolSelectable>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))();
+                    Selectable = Marshal.GetDelegateForFunctionPointer<LoadedToolSelectable>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))() > 0;
+
+                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))()) + Selectable.ToString();
 
                     SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
                     ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
