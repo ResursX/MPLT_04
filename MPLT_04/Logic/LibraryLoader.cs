@@ -20,5 +20,8 @@ namespace MPLT_04.Logic
 
         [DllImport("gdi32.dll", SetLastError = true)]
         public static extern bool DeleteObject(IntPtr hObject);
+
+        [DllImport("gdi32.dll", SetLastError = true)]
+        public static extern int GetPixel(IntPtr hdc, int x, int y);
     }
 }

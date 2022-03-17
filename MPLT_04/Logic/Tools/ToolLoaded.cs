@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,7 +18,8 @@ namespace MPLT_04.Logic.Tools
     internal delegate int LoadedToolSelectable();
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate void LoadedToolAction(IntPtr bitmap, IntPtr hdc);
+    //internal delegate void LoadedToolAction(ref Bitmap bitmap, ref Graphics graphics);
+    internal delegate void LoadedToolAction(byte[] bitmap, int width, int height, int bitsPerPixel); //IntPtr hdc, int width, int height);
 
     //internal delegate void LoadedToolMouseAction(Bitmap bitmap, int X, int Y);
 
@@ -40,16 +42,14 @@ namespace MPLT_04.Logic.Tools
             {
                 try
                 {
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
-                    Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
-
-                    
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolName"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
+                    //Debug.WriteLine(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
 
                     Selectable = Marshal.GetDelegateForFunctionPointer<LoadedToolSelectable>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectable"))() > 0;
 
-                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))()) + Selectable.ToString();
+                    Name = Marshal.PtrToStringAnsi(Marshal.GetDelegateForFunctionPointer<LoadedToolName>(LibraryLoader.GetProcAddress(hLibrary, "ToolName"))());
 
                     SelectDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolSelectAction"));
                     ExtraDelegate = Marshal.GetDelegateForFunctionPointer<LoadedToolAction>(LibraryLoader.GetProcAddress(hLibrary, "ToolExtraAction"));
@@ -75,13 +75,20 @@ namespace MPLT_04.Logic.Tools
         {
             if (SelectDelegate != null && editor != null && editor.Image != null)
             {
-                IntPtr hBtn = editor.Image.GetHbitmap();
-                IntPtr hdc = editor.Graphics.GetHdc();
+                BitmapData bmpd = editor.Image.LockBits(new Rectangle(0, 0, editor.Image.Width, editor.Image.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, editor.Image.PixelFormat);
 
-                SelectDelegate(hBtn, hdc);
+                IntPtr ptr = bmpd.Scan0;
 
-                editor.Graphics.ReleaseHdc();
-                LibraryLoader.DeleteObject(hBtn);
+                int bytes = Math.Abs(bmpd.Stride) * bmpd.Height;
+                byte[] rgbValues = new byte[bytes];
+
+                Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+                SelectDelegate(rgbValues, editor.Image.Width, editor.Image.Height, Image.GetPixelFormatSize(bmpd.PixelFormat));
+
+                Marshal.Copy(rgbValues, 0, ptr, bytes);
+
+                editor.Image.UnlockBits(bmpd);
             }
         }
 
@@ -89,13 +96,20 @@ namespace MPLT_04.Logic.Tools
         {
             if (ExtraDelegate != null && editor != null && editor.Image != null)
             {
-                IntPtr hBtn = editor.Image.GetHbitmap();
-                IntPtr hdc = editor.Graphics.GetHdc();
+                BitmapData bmpd = editor.Image.LockBits(new Rectangle(0, 0, editor.Image.Width, editor.Image.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, editor.Image.PixelFormat);
 
-                ExtraDelegate(hBtn, hdc);
+                IntPtr ptr = bmpd.Scan0;
 
-                editor.Graphics.ReleaseHdc();
-                LibraryLoader.DeleteObject(hBtn);
+                int bytes = Math.Abs(bmpd.Stride) * bmpd.Height;
+                byte[] rgbValues = new byte[bytes];
+
+                Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+                ExtraDelegate(rgbValues, editor.Image.Width, editor.Image.Height, Image.GetPixelFormatSize(bmpd.PixelFormat));
+
+                Marshal.Copy(rgbValues, 0, ptr, bytes);
+
+                editor.Image.UnlockBits(bmpd);
             }
         }
 

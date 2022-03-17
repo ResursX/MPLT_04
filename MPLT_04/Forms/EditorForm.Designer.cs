@@ -45,6 +45,7 @@ namespace MPLT_04.Forms
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStripSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripFormat = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -66,7 +67,7 @@ namespace MPLT_04.Forms
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip.Location = new System.Drawing.Point(0, 25);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(48, 343);
+            this.toolStrip.Size = new System.Drawing.Size(48, 341);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip2";
             // 
@@ -79,7 +80,7 @@ namespace MPLT_04.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(48, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(638, 343);
+            this.panel1.Size = new System.Drawing.Size(638, 341);
             this.panel1.TabIndex = 2;
             // 
             // pictureBox
@@ -96,19 +97,27 @@ namespace MPLT_04.Forms
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusStripSize});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 368);
+            this.statusStripSize,
+            this.statusStripFormat});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 366);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(686, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(686, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // statusStripSize
             // 
             this.statusStripSize.Name = "statusStripSize";
-            this.statusStripSize.Size = new System.Drawing.Size(12, 17);
+            this.statusStripSize.Size = new System.Drawing.Size(12, 19);
             this.statusStripSize.Text = "-";
+            // 
+            // statusStripFormat
+            // 
+            this.statusStripFormat.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.statusStripFormat.Name = "statusStripFormat";
+            this.statusStripFormat.Size = new System.Drawing.Size(16, 19);
+            this.statusStripFormat.Text = "-";
             // 
             // EditorForm
             // 
@@ -139,5 +148,6 @@ namespace MPLT_04.Forms
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusStripSize;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ToolStripStatusLabel statusStripFormat;
     }
 }

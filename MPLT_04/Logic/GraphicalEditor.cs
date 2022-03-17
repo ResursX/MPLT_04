@@ -310,6 +310,13 @@ namespace MPLT_04.Logic
             }
         }
 
+        public void ToolExtraAction(Tool tool)
+        {
+            tool.ExtraAction(this);
+
+            OnImageUpdate(this);
+        }
+
         public void MouseDown(MouseEventArgs args)
         {
             if (selectedTool != null)

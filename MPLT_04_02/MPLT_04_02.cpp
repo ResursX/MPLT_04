@@ -3,9 +3,16 @@
 #include "pch.h"
 #include <tchar.h>
 #include <windows.h>
-#include <string>
 
-char name[] = "Mirror (Horizontal)";
+#include <string>
+#include <sstream>
+
+#include <objidl.h>
+#include <gdiplus.h>
+using namespace Gdiplus;
+#pragma comment (lib,"Gdiplus.lib")
+
+char name[] = "Mirror (Horizontal/Vertical)";
 
 extern "C" __declspec(dllexport) char* __cdecl ToolName()
 {
@@ -16,36 +23,47 @@ extern "C" __declspec(dllexport) int __cdecl ToolSelectable()
     return 0;
 }
 
-extern "C" __declspec(dllexport) void __cdecl ToolSelectAction(HBITMAP bitmap, HDC hdc)
+extern "C" __declspec(dllexport) void __cdecl ToolSelectAction(unsigned char* bitmap, int width, int height, int bitsPerPixel)
 {
-    BITMAP bm, cbm;
+    //std::stringstream ss;
+    //ss << width << "x" << height;
+    //ss << std::endl << bitsPerPixel;
+    //MessageBoxA(NULL, ss.str().c_str(), "LOL", MB_OK);
 
-    GetObject(bitmap, sizeof(BITMAP), (LPSTR)&bm);
+    int bypp = bitsPerPixel / 8;
 
-    std::string s = std::to_string(bm.bmWidth) + "x" + std::to_string(bm.bmHeight);
-    MessageBoxA(NULL, s.c_str(), "LOL", MB_OK);
+    unsigned char t;
 
-    HDC cdc = CreateCompatibleDC(hdc);
-    HBITMAP hcbm = CreateCompatibleBitmap(hdc, bm.bmWidth, bm.bmHeight);
-    
-    SelectObject(cdc, hcbm);
-    
-    SelectObject(cdc, CreateSolidBrush(RGB(255, 0, 0)));
-    SelectObject(cdc, CreatePen(PS_SOLID, 3, RGB(0, 255, 0)));
-    
-    //BitBlt(cdc, 0, 0, bm.bmWidth, bm.bmHeight, hdc, 0, 0, SRCCOPY);
-
-    StretchBlt(cdc, 0, 0, bm.bmWidth, bm.bmHeight, hdc, 0, 0, bm.bmWidth, bm.bmHeight, SRCCOPY);
-
-    //Fill(cdc, 0, 0, bm.bmWidth, bm.bmHeight);
-    Ellipse(cdc, 10, 10, 100, 100);
-
-    StretchBlt(hdc, bm.bmWidth, 0, -bm.bmWidth, bm.bmHeight, cdc, 0, 0, bm.bmWidth, bm.bmHeight, SRCCOPY);
-
-    DeleteDC(cdc);
-    DeleteObject(hcbm);
+    for (int j = 0; j < height; j++)
+    {
+        for (int i = 0; i < width / 2; i++)
+        {
+            for (int k = 0; k < bypp; k++)
+            {
+                t = bitmap[j * bypp * width + i * bypp + k];
+                bitmap[j * bypp * width + i * bypp + k] = bitmap[(j + 1) * bypp * width - (i + 1) * bypp + k];
+                bitmap[(j + 1) * bypp * width - (i + 1) * bypp + k] = t;
+            }
+        }
+    }
 }
 
-extern "C" __declspec(dllexport) void __cdecl ToolExtraAction(HBITMAP bitmap, HDC hdc)
+extern "C" __declspec(dllexport) void __cdecl ToolExtraAction(unsigned char* bitmap, int width, int height, int bitsPerPixel)
 {
+    int bypp = bitsPerPixel / 8;
+
+    unsigned char t;
+
+    for (int j = 0; j < height / 2; j++)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int k = 0; k < bypp; k++)
+            {
+                t = bitmap[j * bypp * width + i * bypp + k];
+                bitmap[j * bypp * width + i * bypp + k] = bitmap[(height - j - 1) * bypp * width + i * bypp + k];
+                bitmap[(height - j - 1) * bypp * width + i * bypp + k] = t;
+            }
+        }
+    }
 }

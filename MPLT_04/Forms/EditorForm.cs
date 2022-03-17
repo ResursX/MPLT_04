@@ -69,6 +69,18 @@ namespace MPLT_04.Forms
 
             GraphicalEditor = new GraphicalEditor(pictureBox);
 
+            GraphicalEditor.OnImageChange += (e) =>
+            {
+                if (e.Image != null)
+                {
+                    statusStripFormat.Text = e.Image.PixelFormat.ToString();
+                }
+                else
+                {
+                    statusStripFormat.Text = "-";
+                }
+            };
+
             //Действия
 
             ButtonCreate = AddActionButton(ActionCreate = new ActionCreate(GraphicalEditor), Resources.NewFile);
@@ -254,7 +266,7 @@ namespace MPLT_04.Forms
                 {
                     if (e.Button == MouseButtons.Right)
                     {
-                        tool.ExtraAction(GraphicalEditor);
+                        GraphicalEditor.ToolExtraAction(tool);
                     }
                 }
                 catch (Exception ex)
